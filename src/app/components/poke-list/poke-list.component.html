@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+        <div id="app" class="col-md-1" *ngFor="let pokemon of results">
+            <div class="pkm-container">
+                <div class="pkm-img">
+                    <img src='https://pokeres.bastionbot.org/images/pokemon/{{pokemon.id}}.png' alt='{{pokemon.name}}'>
+                </div>
+
+                <h1 class="pkm-name">{{pokemon.name}}</h1>
+
+                <div class="pkm-hp">
+                    <div class="pkm-hp-bar"></div>
+                    <div>
+                        HP<span class="pkm-hp-currrent">50</span>/<span class="pkm-hp-total">50</span>
+                    </div>
+                </div>
+
+
+
+                <div class="pkm-att">
+                    <div class="pkm-att-type">
+                        <div class="value"><span>{{pokemon.type}}</span></div>
+                        <div class="type">Tipo</div>
+                    </div>
+                    <div class="pkm-att-weight">
+                        <div class="value">{{pokemon.weight}}</div>
+                        <div class="type">Weight</div>
+                    </div>
+                    <div class="pkm-att-height">
+                        <div class="value">{{pokemon.height}}</div>
+                        <div class="type">Height</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
