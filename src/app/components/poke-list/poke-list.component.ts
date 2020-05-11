@@ -26,10 +26,9 @@ export class PokeListComponent implements OnInit {
 
     return this.pokeService.getAllPokemons(offset).subscribe((data) => {
       this.pokedex = data;
-      console.log(this.pokedex);
       this.pokedex.results.forEach((obj, index) => {
         this.pokeService.getPokemonByName(this.pokedex.results[index].name).subscribe(newData => {
-          this.results[index] = newData;
+          this.results[offset + index] = newData;
         });
       });
     });

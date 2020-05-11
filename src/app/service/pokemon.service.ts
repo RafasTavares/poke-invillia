@@ -25,7 +25,6 @@ export class PokemonService {
   }
 
   getPokemonByName(name: string): Observable<Pokemon> {
-    console.log('passou aqui');
     return this.http.get<Pokemon>(this.rootUrl + 'pokemon/' + name)
       .pipe(retry(1), catchError(this.handleError));
   }
