@@ -18,26 +18,21 @@ export class PokemonService {
 
   getAllPokemons(offset): Observable<Pokedex> {
 
-    const params = new HttpParams().set('offset', offset);
+    let params = new HttpParams().set('offset', offset);
 
     return this.http.get<Pokedex>(this.rootUrl + 'pokemon', { params })
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      );
+      .pipe(retry(1), catchError(this.handleError));
   }
 
-  getPokemonByName(name: string):Observable<Pokemon> {
+  getPokemonByName(name: string): Observable<Pokemon> {
+    console.log('passou aqui');
     return this.http.get<Pokemon>(this.rootUrl + 'pokemon/' + name)
       .pipe(retry(1), catchError(this.handleError));
   }
 
   handleError(error) {
     let errorMessage = (error.error instanceof ErrorEvent) ? error.error.message : `Error: ${error.status}\nMsg: ${error.message}`;
-
-    // add notification
     window.alert(errorMessage);
-
     return throwError(errorMessage);
   }
 }
