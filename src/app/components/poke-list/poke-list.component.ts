@@ -12,12 +12,13 @@ import { Pokedex } from 'src/app/model/pokedex.model';
 export class PokeListComponent implements OnInit {
 
   @Output() pokedex: Pokedex;
-  @Output() pokemons = [new Pokemon()];
+  @Output() results = [new Pokemon()];
+  index: number = 1;
 
   constructor(private pokeService: PokemonService) { }
 
   ngOnInit() {
-    this.loadPokemons(1, 500);
+    this.loadPokemons(this.index, 10);
   }
 
   loadPokemons(offset: number, size: number) {
@@ -25,12 +26,17 @@ export class PokeListComponent implements OnInit {
 
     return this.pokeService.getAllPokemons(offset).subscribe((data) => {
       this.pokedex = data;
+      console.log(this.pokedex);
       this.pokedex.results.forEach((obj, index) => {
         this.pokeService.getPokemonByName(this.pokedex.results[index].name).subscribe(newData => {
-          this.pokemons[index] = newData;
+          this.results[index] = newData;
         });
       });
     });
   }
 
+  atualizarLista() {
+    this.index = this.index + 1;
+    this.loadPokemons(this.index, 10);
+  }
 }
